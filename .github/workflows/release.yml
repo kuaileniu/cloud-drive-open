@@ -90,5 +90,7 @@ jobs:
           # zip压缩包的名称为 action1.1.zip(使用的go module 默认名称)
           # (若干多个build时，此名称相同，则合并打包到一个zip中)
           name: elf_${{ runner.os }}
+          compression-level: 9
           # 将 action打包到 action1.1.zip中并把 action1.1.zip 上传到github的本次action的Artifacts下
           path: ${{ github.workspace }}/cloud-drive/src-tauri/target/release/bundle/
+ 
