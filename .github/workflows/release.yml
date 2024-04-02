@@ -84,7 +84,7 @@ jobs:
           releaseDraft: true
 
       - name: Upload execution
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@main
         if: always()
         with:
           # zip压缩包的名称为 action1.1.zip(使用的go module 默认名称)
