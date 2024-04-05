@@ -17,7 +17,7 @@ jobs:
     env:
         pwd: ${{ secrets.ZIP_PWD }}  
         op: zip  
-        source: ../cloud-drive/src-tauri/target/release/bundle
+        source: ${{ github.workspace }}/cloud-drive/src-tauri/target/release/bundle
         destination: ${{ github.workspace }}/bundle.zip
     steps:
       - uses: actions/checkout@v4
@@ -27,15 +27,16 @@ jobs:
 
 # url中不加用户名时，默认是使用本repo的用户名，也可以成功clone下来   
       - name: Download private repo
-        run: git clone https://${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com/kuaileniu/cloud-drive.git
+        run: 
+          cd ${{ github.workspace }}
+          git clone https://${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com/kuaileniu/cloud-drive.git
 
       - name: Display structure of downloaded files
         run: ls -R
       - name: Display cloud drive
         run: |
             echo "cloud-drive下的文件"
-            cd cloud-drive
-            ls 
+            ls  ${{ github.workspace }}/cloud-drive
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
@@ -73,9 +74,7 @@ jobs:
 
       - name: Install frontend dependencies
         run: |
-              pwd
-              ls
-              cd cloud-drive
+              cd  ${{ github.workspace }}/cloud-drive
               pnpm install --no-frozen-lockfile
 
       - name: Build and release
@@ -90,11 +89,11 @@ jobs:
       
       - name: Download zip(archiver) repo and make zip package
         run: |
-          cd ../  
+          cd ${{ github.workspace }} 
           echo "Download当前位置"
           pwd
           git clone https://${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com/kuaileniu/archiver.git
-          cd archiver
+          cd ${{ github.workspace }}/archiver
           echo "当前位置,期望是    xxx/archiver"
           pwd
           echo "archiver目录下的文件"
