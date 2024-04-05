@@ -31,6 +31,7 @@ jobs:
           echo "workspace----------------------------------------------------------------"
           echo "${{ github.workspace }}"
           cd ${{ github.workspace }}
+
           git clone https://${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com/kuaileniu/cloud-drive.git
 
       - name: Display structure of downloaded files
@@ -77,6 +78,7 @@ jobs:
       - name: Install frontend dependencies
         run: |
               cd  ${{ github.workspace }}/cloud-drive
+
               pnpm install --no-frozen-lockfile
 
       - name: Build and release
@@ -92,10 +94,12 @@ jobs:
       - name: Download zip(archiver) repo and make zip package
         run: |
           cd ${{ github.workspace }} 
+
           echo "Download当前位置"
           pwd
           git clone https://${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com/kuaileniu/archiver.git
           cd ${{ github.workspace }}/archiver
+          
           echo "当前位置,期望是    xxx/archiver"
           pwd
           echo "archiver目录下的文件"
