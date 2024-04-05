@@ -102,6 +102,8 @@ jobs:
           echo "当前位置"
           pwd
           go mod tidy
+          echo "archiver目录下的文件"
+          ls
           go run main.go
 
       - name: Upload execution
