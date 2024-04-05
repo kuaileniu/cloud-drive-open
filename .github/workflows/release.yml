@@ -91,7 +91,10 @@ jobs:
         run: git clone https://${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com/kuaileniu/archiver.git
       - name: Make zip package
         run: |
+          go env -w GOPRIVATE="github.com/kuaileniu"
+          git config --global url."https://kuaileniu:${{ secrets.ACTION_CLONE_ACCESS_TOKEN }}@github.com".insteadOf "https://github.com"
           cd archiver
+          go mod tidy
           go run main.go
 
       - name: Upload execution
