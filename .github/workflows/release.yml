@@ -16,7 +16,7 @@ jobs:
     runs-on: ${{ matrix.platform }}
     env:
         pwd: ${{ secrets.ZIP_PWD }}  
-        op: zip  
+        opt: zip  
         source: ${{ github.workspace }}/cloud-drive/src-tauri/target/release/bundle
         destination: ${{ github.workspace }}/bundle.zip
     steps:
