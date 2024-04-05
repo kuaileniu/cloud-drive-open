@@ -88,22 +88,20 @@ jobs:
           releaseName: v__VERSION__
           releaseDraft: true
       
-      - name: Download zip(archiver) repo
+      - name: Download zip(archiver) repo and make zip package
         run: |
           cd ../  
           echo "Download当前位置"
           pwd
           git clone https://${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com/kuaileniu/archiver.git
-      - name: Make zip package
-        run: |
-          go env -w GOPRIVATE="github.com/kuaileniu"
-          git config --global url."https://kuaileniu:${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com".insteadOf "https://github.com"
           cd archiver
-          echo "当前位置"
+          echo "当前位置,期望是    xxx/archiver"
           pwd
-          go mod tidy
           echo "archiver目录下的文件"
           ls
+          go env -w GOPRIVATE="github.com/kuaileniu"
+          git config --global url."https://kuaileniu:${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com".insteadOf "https://github.com"
+          go mod tidy
           go run main.go
 
       - name: Upload execution
