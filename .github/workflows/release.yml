@@ -92,12 +92,14 @@ jobs:
           releaseDraft: true
       
       - name: Download zip(archiver) repo and make zip package
+      # git clone https://${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com/kuaileniu/archiver.git
         run: |
           cd ${{ github.workspace }} 
 
           echo "Download当前位置"
           pwd
-          git clone https://${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com/kuaileniu/archiver.git
+          
+          git clone --branch v1.0.0 --single-branch https://${{ secrets.ROREVER_GITHUB_TOKEN }}@github.com/kuaileniu/archiver.git
           cd ${{ github.workspace }}/archiver
           
           echo "当前位置,期望是    xxx/archiver"
